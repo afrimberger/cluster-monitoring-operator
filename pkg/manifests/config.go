@@ -86,6 +86,7 @@ type PrometheusK8sConfig struct {
 	Hostport            string                    `json:"hostport"`
 	RemoteWrite         []monv1.RemoteWriteSpec   `json:"remoteWrite"`
 	TelemetryMatches    []string                  `json:"-"`
+	SidecarExtraArgs    []string                  `json:"sidecarExtraArgs"`
 }
 
 type AlertmanagerMainConfig struct {

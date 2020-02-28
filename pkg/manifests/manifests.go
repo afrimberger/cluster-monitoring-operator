@@ -1135,6 +1135,11 @@ func (f *Factory) PrometheusK8s(host string, grpcTLS *v1.Secret, trustedCABundle
 		}
 	}
 
+	if len(f.config.PrometheusK8sConfig.SidecarExtraArgs) > 0 {
+		old_list := p.Spec.Containers[K8S_CONTAINER_THANOS_SIDECAR].Args
+		p.Spec.Containers[K8S_CONTAINER_THANOS_SIDECAR].Args = append(old_list, f.config.PrometheusK8sConfig.SidecarExtraArgs...)
+	}	
+
 	telemetryEnabled := f.config.TelemeterClientConfig.IsEnabled()
 	if telemetryEnabled && f.config.RemoteWrite {
 
